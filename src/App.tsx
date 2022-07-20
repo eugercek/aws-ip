@@ -10,10 +10,13 @@ export default function App() {
   const [error, setError] = useState(false);
 
   // TODO Optimize it
-  const findResource = (ip: string): Res | null =>
-    document?.prefixes.find((o) => isInSubnet(ip, o.ip_prefix)) ||
-    document?.ipv6_prefixes.find((o) => isInSubnet(ip, o.ip_prefix)) ||
-    null;
+  const findResources = function (ip: string): Res[] | null {
+    if (!isIP(ip)) return null;
+
+    return document?.prefixes.filter((o) => isInSubnet(ip, o.ip_prefix)) ||
+      document?.ipv6_prefixes.filter((o) => isInSubnet(ip, o.ipv6_prefix)) ||
+      null;
+  }
 
   useEffect(() => {
     fetchDocument()
@@ -21,15 +24,16 @@ export default function App() {
       .catch(() => setError(true));
   }, []);
 
+  const resources = findResources(ip)?.map(e => <Resource {...e} />)
+
+  console.log(resources)
   return (
     <>
       <form>
         <input type="text" value={ip} onChange={(e) => setIp(e.target.value)} />
       </form>
       {error && "Can not fetch message"}
-      {!error && !!isIP(ip) && (
-        <Resource {...(findResource(ip) || { region: "", service: "" })} />
-      )}
+      {!error && !!isIP(ip) && resources}
     </>
   );
 }
