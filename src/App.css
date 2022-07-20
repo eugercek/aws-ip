@@ -66,3 +66,9 @@
 input.ipv6 {
     font-size: 2em;
 }
+
+.not-error{
+    color: crimson;
+    font-size: 1.3em;
+    text-align: left;
+}

@@ -10,7 +10,6 @@ export default function App() {
   const [ip, setIp] = useState("");
   const [error, setError] = useState(false);
 
-  // TODO Optimize it
   const findResources = function (ip: string) {
     if (isIPv4(ip)) {
       return document?.prefixes.filter((o) => isInSubnet(ip, o.ip_prefix));
@@ -48,6 +47,11 @@ export default function App() {
       <div className="resource-container">
         {!error && !!isIP(ip) && resources}
       </div>
+      {!error && isIP(ip) && resources && resources.length == 0 ? (
+        <div className="not-error">Not an AWS IP</div>
+      ) : (
+        ""
+      )}
     </main>
   );
 }
