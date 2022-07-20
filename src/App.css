@@ -26,6 +26,12 @@
     width: 60vw;
 }
 
+.create-date {
+    font-family: monospace;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
 
 .resource-container {
     display: flex;
@@ -49,6 +55,11 @@
 
     .resource-container {
         width: 80vw;
+    }
+
+    .create-date {
+        top: auto;
+        bottom: 20px;
     }
 }
 
