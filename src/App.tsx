@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Resource from "./Resource";
 import { Document, Res } from "./types";
 import { isInSubnet, isIP } from "is-in-subnet";
+import './App.css'
 
 export default function App() {
   const [document, setDocument] = useState<Document | null>(null);
@@ -26,14 +27,15 @@ export default function App() {
 
   const resources = findResources(ip)?.map(e => <Resource {...e} />)
 
-  console.log(resources)
   return (
-    <>
+    <main className="app">
       <form>
         <input type="text" value={ip} onChange={(e) => setIp(e.target.value)} />
       </form>
       {error && "Can not fetch message"}
-      {!error && !!isIP(ip) && resources}
-    </>
+      <div className="resource-container">
+        {!error && !!isIP(ip) && resources}
+      </div>
+    </main>
   );
 }

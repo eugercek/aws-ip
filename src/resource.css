@@ -1,0 +1,16 @@
+.resource{
+}
+
+.resource h1 {
+    font-style: oblique;
+    color: gray;
+}
+.resource h2 {
+    color: gray;
+    font-style: oblique;
+}
+
+span.value {
+    font-style: normal;
+    color: rebeccapurple;
+}
