@@ -22,6 +22,8 @@
     outline: none; /*Open PR If you want this accessiblity*/
 
     text-align: center;
+
+    width: 60vw;
 }
 
 
@@ -48,4 +50,8 @@
     .resource-container {
         width: 80vw;
     }
+}
+
+input.ipv6 {
+    font-size: 2em;
 }

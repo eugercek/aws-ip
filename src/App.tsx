@@ -2,7 +2,7 @@ import { fetchDocument } from "./util";
 import { useEffect, useState } from "react";
 import Resource from "./Resource";
 import { Document, Res } from "./types";
-import { isInSubnet, isIP } from "is-in-subnet";
+import { isInSubnet, isIP, isIPv4, isIPv6 } from "is-in-subnet";
 import './App.css'
 
 export default function App() {
@@ -11,12 +11,14 @@ export default function App() {
   const [error, setError] = useState(false);
 
   // TODO Optimize it
-  const findResources = function (ip: string): Res[] | null {
-    if (!isIP(ip)) return null;
-
-    return document?.prefixes.filter((o) => isInSubnet(ip, o.ip_prefix)) ||
-      document?.ipv6_prefixes.filter((o) => isInSubnet(ip, o.ipv6_prefix)) ||
-      null;
+  const findResources = function (ip: string) {
+    if (isIPv4(ip)) {
+      return document?.prefixes.filter((o) => isInSubnet(ip, o.ip_prefix))
+    } else if (isIPv6(ip)) {
+      return document?.ipv6_prefixes.filter((o) => isInSubnet(ip, o.ipv6_prefix))
+    } else {
+      return null
+    }
   }
 
   useEffect(() => {
@@ -25,12 +27,12 @@ export default function App() {
       .catch(() => setError(true));
   }, []);
 
-  const resources = findResources(ip)?.map(e => <Resource {...e} />)
+  const resources = findResources(ip)?.map((e, i) => <Resource {...e} key={i} />)
 
   return (
     <main className="app">
       <form>
-        <input type="text" value={ip} onChange={(e) => setIp(e.target.value)} />
+        <input type="text" value={ip} onChange={(e) => setIp(e.target.value.replaceAll(' ', ''))} className={isIPv6(ip) ? "ipv6" : ""} />
       </form>
       {error && "Can not fetch message"}
       <div className="resource-container">
