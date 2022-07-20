@@ -1,3 +1,7 @@
+.resource:last-of-type::after {
+    height: 0;
+}
+
 .resource h1 {
     font-style: oblique;
     color: gray;
@@ -15,5 +19,28 @@ span.value {
 @media screen and (max-width: 800px) {
     .resource {
         font-size: 0.65em;
+    }
+
+    .resource::after {
+    content: '';
+    /*|-5-20-40-20-5|*/
+    width: 40vw;
+    height: 2px;
+    display: inline-block;
+    background-color: gainsboro;
+    margin-left: 20vw;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .resource::after {
+    content: '';
+    /*|-10-20-40-20-10|*/
+    width: 20vw;
+    height: 3px;
+    display: inline-block;
+    background: gainsboro;
+
+    margin-left:10vw;
     }
 }
