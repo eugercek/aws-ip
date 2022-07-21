@@ -1,7 +1,7 @@
 import { fetchDocument } from "./util";
 import { useEffect, useState } from "react";
 import Resource from "./Resource";
-import { Document, Res } from "./types";
+import { Document } from "./types";
 import { isInSubnet, isIP, isIPv4, isIPv6 } from "is-in-subnet";
 import "./App.css";
 
@@ -35,7 +35,7 @@ export default function App() {
   return (
     <main className="app">
       <div className="create-date">{document?.createDate}</div>
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
           onChange={(e) => setIp(e.target.value.replaceAll(" ", ""))}
