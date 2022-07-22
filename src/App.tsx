@@ -34,7 +34,7 @@ export default function App() {
 
   return (
     <main className="app">
-      <div className="create-date">{document?.createDate}</div>
+      <div className="create-date">{document ? document.createDate : "Fetching..."}</div>
       <form onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
