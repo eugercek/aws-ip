@@ -4,6 +4,7 @@ import Resource from "./Resource";
 import { Document } from "./types";
 import { isInSubnet, isIP, isIPv4, isIPv6 } from "is-in-subnet";
 import "./App.css";
+import { isPrivate } from "is-in-subnet/build/src/ipv4";
 
 export default function App() {
   const [document, setDocument] = useState<Document | null>(null);
@@ -48,7 +49,11 @@ export default function App() {
         {!error && !!isIP(ip) && resources}
       </div>
       {!error && isIP(ip) && resources && resources.length == 0 ? (
-        <div className="not-error">Not an AWS IP</div>
+        isPrivate(ip) ? (
+          <div className="private-ip">Private IP</div>
+        ) : (
+          <div className="not-error">Not an AWS IP</div>
+        )
       ) : (
         ""
       )}

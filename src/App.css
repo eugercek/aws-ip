@@ -72,3 +72,7 @@ input.ipv6 {
     font-size: 1.3em;
     text-align: left;
 }
+
+.private-ip {
+    font-size: 1.5em;
+}
