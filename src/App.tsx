@@ -35,7 +35,9 @@ export default function App() {
 
   return (
     <main className="app">
-      <div className="create-date">{document ? document.createDate : "Fetching..."}</div>
+      <div className="create-date">
+        {document ? document.createDate : "Fetching..."}
+      </div>
       <form onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
@@ -46,6 +48,7 @@ export default function App() {
       </form>
       {error && "Can not fetch message"}
       <div className="resource-container">
+        {/* Show AWS IP*/}
         {!error && !!isIP(ip) && resources}
       </div>
       {!error && isIP(ip) && resources && resources.length == 0 ? (
